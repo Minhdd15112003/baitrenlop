@@ -1,0 +1,41 @@
+<!-- Product section-->
+<form method="get" action="">
+  <section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+      <div class="row gx-4 gx-lg-5 align-items-center">
+        <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="/uploads/<%= comicData.coverImage  %>" alt="..." /></div>
+        <div class="col-md-6">
+          <div class="small mb-1" hidden>ID: <%= comicData._id %></div>
+          <span style="color: gray;"> [cập nhật lúc <%= comicData.year %>]</span>
+          <h1 class="display-5 fw-bolder"><%= comicData.name %></h1>
+          <div class="fs-5 mb-5">
+            <% if (comicData && comicData.CateID) { %>
+            <h4>tác giả : <span><%= comicData.author %></span></h4>
+            <p>thể loại: <%= comicData.CateID.Cate %></p>
+            <% } %>
+          </div>
+          <div class="d-flex">
+            <a href="/getDetailComic/<%= comicData._id %>/readComic">
+            <button class="btn btn-outline-dark flex-shrink-0" type="button">
+              <i class="bi-cart-fill me-1"></i>
+              Đọc truyện
+            </button>
+          </a>
+            <a href="/getDetailComic/<%= comicData._id %>/getFormUpdateComic">
+              <button style="margin-right: 10px; margin-left: 10px;" class="btn btn-outline-dark flex-shrink-0" type="button">
+                Update
+              </button>
+            </a>
+            <a href="/deleteComic/<%= comicData._id %>">
+              <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                Delete
+              </button>
+            </a>
+          </div>
+          <h3 style="margin-top: 50px;">nội dung</h3>
+          <span class="lead"><%= comicData.description %></span>
+        </div>
+      </div>
+    </div>
+  </section>
+</form>

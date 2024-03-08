@@ -1,0 +1,40 @@
+
+  <form method="post"  action="/updateComic/<%= comicData._id %>" enctype="multipart/form-data">
+    <div class="form-row">
+        <input hidden ="id" value="<%= comicData._id %>" />
+      <div class="form-group col-md-6">
+        <label for="inputEmail4">Name Comic</label>
+        <input name="name" value="<%= comicData.name %>" type="text" class="form-control" id="inputEmail4" placeholder="Name Product">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputPassword4">Author</label> 
+        <input name="author" value="<%= comicData.author %>" type="text" class="form-control" id="inputPassword4" placeholder="Author">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputAddress">Description</label>
+      <textarea name="description" class="form-control" id="inputAddress"><%= comicData.description %>"</textarea>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="exampleFormControlFile1">Cover Image</label>
+        <input name="coverImage" type="file" class="form-control-file" id="exampleFormControlFile1" accept="image/*">
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlFile2">Content Images</label>
+        <input name="contentImages" type="file" class="form-control-file" id="exampleFormControlFile2" accept="image/*" multiple>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlFile2">Date</label>
+        <input type="date" id="birthday" name="year" value="<%= comicData.year %>" class="form-control-file" id="exampleFormControlFile2">
+      </div>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputState">Category</label>
+      <select id="inputState" name="CateID" class="form-control"> <option selected>Choose...</option>
+          <% for(let i = 0; i < cateData.length; i++) { %>
+          <option value="<%= cateData[i].id %>"><%= cateData[i].Cate %></option> <% } %>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>

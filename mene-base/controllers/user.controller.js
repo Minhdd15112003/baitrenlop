@@ -89,9 +89,9 @@ class UserController {
       .then((user) => {
         if (!user) {
           res.status(500).send("Không tìm thấy người dùng với ID: " + id);
-          console.log("====================================");
-          console.log(req.body);
-          console.log("====================================");
+          // console.log("====================================");
+          // console.log(req.body);
+          // console.log("====================================");
         } else {
           res.redirect("/getUsers");
           //res.json(user);

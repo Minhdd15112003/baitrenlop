@@ -16,7 +16,7 @@ const { log } = require("console");
  */
 
 var app = require("../app");
-var debug = require("debug")("mene-base:server");
+var debug = require("debug")("servernetworking:server");
 var http = require("http");
 
 /**
