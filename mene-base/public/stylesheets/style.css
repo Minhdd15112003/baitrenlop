@@ -4,8 +4,10 @@ body {
   }
   .btnCart {
     margin-right: 10px;
-    
   }
+.nav-item{
+  font: 20px "Lucida Grande", Helvetica, Arial, sans-serif !important;
+}
   
 
   

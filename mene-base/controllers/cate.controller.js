@@ -47,9 +47,10 @@ class cateController{
     const CateID = req.params.id;
     comicModel
       .find({ CateID: CateID })
+      .populate("CateID")
       .then((comicData) => {
         if (comicData) {
-          res.render("home/cateView/getComic", {
+          res.render("home/comicView/getComic", {
             comicData: comicData,
           });
         } else {
