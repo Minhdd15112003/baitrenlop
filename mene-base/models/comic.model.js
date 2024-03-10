@@ -15,6 +15,7 @@ const ComicSchema = new mongoose.Schema({
   commentObjects: [{
     content: { type: String, required: true },
     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'userModel', required: true },
+    username:{ type: mongoose.Schema.Types.String, ref: 'userModel', required: true },
     date: { type: Date, default: Date.now },
   }],
 });

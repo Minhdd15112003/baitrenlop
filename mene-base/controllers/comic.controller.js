@@ -94,7 +94,6 @@ class ComicController {
     const userId = req.user.id;
     const username = req.user.Username;
     const content = req.body.content;
-  
     try {
       // Tạo comment mới
       const newComment = {
@@ -111,6 +110,10 @@ class ComicController {
     } catch (error) {
       res.status(500).send("Lỗi khi bình luận: " + error.message);
     }
+  }
+
+  deleteCommentComic(req,res){
+    
   }
 
   getFormUpdateComic(req, res) {
