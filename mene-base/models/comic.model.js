@@ -12,6 +12,11 @@ const ComicSchema = new mongoose.Schema({
     required: true,
     ref: "CateModel"
   },
+  commentObjects: [{
+    content: { type: String, required: true },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'userModel', required: true },
+    date: { type: Date, default: Date.now },
+  }],
 });
 
 const ComicModel = mongoose.model('Comic', ComicSchema);

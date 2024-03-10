@@ -1,57 +1,66 @@
-<header>
-  <link rel="stylesheet" href="/stylesheets/style.css">
-  <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container px-4 px-lg-5">
-      <a class="navbar-brand" href="/">
-        <img src="/uploads/logo-nettruyen.png" />
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-          <li class="nav-item"><a class="nav-link active" aria-current="page" href="/getComic">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="/formPostComic">Add Comic</a></li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categoty</a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="/getFormCate">Add Categoty</a></li>
-              <li><a class="dropdown-item" href="/getComic">All Comic</a></li>
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-              <% for( let i = 0; i < cateData.length; i++ ) { %>
-              <li><a class="dropdown-item" href="<%= escape('/getCategoryById/') + cateData[i]._id %>"><%=cateData[i].Cate %></a></li>
-              <% } %>
-            </ul>
-          </li>
-        </ul>
-        <div class="btnCart">
-          <form class="d-flex">
-            <button class="btn btn-outline-dark" type="submit">
-              <i class="bi-cart-fill me-1"></i>
-              Follow 
-              <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-            </button>
-          </form>
+
+  <header>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="/">
+          <img src="/img/logo-nettruyen.png" />
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="/getComic">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/formPostComic">Add Comic</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categoty</a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="/getFormCate">Add Categoty</a></li>
+                <li><a class="dropdown-item" href="/getComic">All Comic</a></li>
+                <li>
+                  <hr class="dropdown-divider" />
+                </li>
+                <% for( let i = 0; i < cateData.length; i++ ) { %>
+                <li><a class="dropdown-item" href="<%= escape('/getCategoryById/') + cateData[i]._id %>"><%=cateData[i].Cate %></a></li>
+                <% } %>
+              </ul>
+            </li>
+          </ul>
+          <div class="btnCart">
+            <form class="d-flex">
+              <button class="btn btn-outline-dark" type="submit">
+                <i class="bi-cart-fill me-1"></i>
+                Follow 
+                <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+              </button>
+            </form>
+          </div>
+          <div class="btnCart">
+            <a href="/getUsers">
+              <button class="btn btn-outline-dark" type="submit">
+                <i class="bi bi-person-circle"></i>
+                User
+              </button>
+            </a>
+          </div>
+          <div class="btnCart">
+            <a href="/logOut">
+              <button class="btn btn-outline-dark" type="submit">
+                <i class="bi bi-person-circle"></i>
+                LogOut
+              </button>
+            </a>
+          </div>
         </div>
-        <div class="btnUser">
-          <a href="/getUsers">
-            <button class="btn btn-outline-dark" type="submit">
-              <i class="bi bi-person-circle"></i>
-              User
-            </button>
-          </a>
+      </div>
+    </nav>
+    <div class="bg-dark py-1">
+      <div class="container px-4 px-lg-5 my-1">
+        <div class="text-center text-white">
+          <img src="https://danhkhoireal.vn/wp-content/uploads/2023/08/NetTruyen-Doc-Truyen-Online.jpg" alt="" >
+          <!-- <h1 class="display-4 fw-bolder">Shop in style</h1>
+          <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p> -->
         </div>
       </div>
     </div>
-  </nav>
-  <div class="bg-dark py-1">
-    <div class="container px-4 px-lg-5 my-1">
-      <div class="text-center text-white">
-        <img src="https://danhkhoireal.vn/wp-content/uploads/2023/08/NetTruyen-Doc-Truyen-Online.jpg" alt="" >
-        <!-- <h1 class="display-4 fw-bolder">Shop in style</h1>
-        <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p> -->
-      </div>
-    </div>
-  </div>
-</header>
+  </header>

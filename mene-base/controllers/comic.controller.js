@@ -1,6 +1,5 @@
 const comicModel = require("../models/comic.model");
 const cateModel = require("../models/cate.model");
-const ComicModel = require("../models/comic.model");
 class ComicController {
   getComic(req, res, next) {
     comicModel
@@ -29,40 +28,39 @@ class ComicController {
       });
   }
   postComic(req, res, next) {
-  
-      const newComic = {
-        name: req.body.name,
-        description: req.body.description,
-        author: req.body.author,
-        year: req.body.year,
-        coverImage: req.files.coverImage
-          ? req.files.coverImage[0].filename
-          : null,
-        contentImages: req.files.contentImages
-          ? req.files.contentImages.map((file) => file.filename)
-          : [],
-        CateID: req.body.CateID,
-      };
-      console.log(newComic);
-      comicModel
-        .create(newComic)
-        .then((comicData) => {
-          if (comicData) {
-            res.redirect("/getComic");
-            //res.json(comicData)
-          } else {
-            res.status(501).json("Không tìm thấy người dùng" + err.message);
-          }
-        })
-        .catch((error) =>{
-          res.status(500).json("Lỗi lưu trữ: " + error.message)
-        });
+    const newComic = {
+      name: req.body.name,
+      description: req.body.description,
+      author: req.body.author,
+      year: req.body.year,
+      coverImage: req.files.coverImage
+        ? req.files.coverImage[0].filename
+        : null,
+      contentImages: req.files.contentImages
+        ? req.files.contentImages.map((file) => file.filename)
+        : [],
+      CateID: req.body.CateID,
+    };
+    console.log(newComic);
+    comicModel
+      .create(newComic)
+      .then((comicData) => {
+        if (comicData) {
+          res.redirect("/getComic");
+          //res.json(comicData)
+        } else {
+          res.status(501).json("Không tìm thấy người dùng" + err.message);
+        }
+      })
+      .catch((error) => {
+        res.status(500).json("Lỗi lưu trữ: " + error.message);
+      });
   }
   getDetailComic(req, res) {
     const id = req.params.id;
     comicModel
       .findById(id)
-      .populate("CateID") // Điền "CateID" để tham chiếu cate
+      .populate("CateID")
       .then(function (comicData) {
         if (comicData) {
           res.render("home/comicView/getDetailComic", {
@@ -82,6 +80,7 @@ class ComicController {
     var comicData = await ComicModel.findById(id);
     if (comicData) {
       res.render("home/comicView/readComic", {
+        comicData: comicData,
         contentImages: comicData.contentImages,
       });
     } else {
@@ -90,6 +89,30 @@ class ComicController {
 
     res.render("home/comicView/readComic");
   }
+  async commentComic(req, res) {
+    const comicId = req.params.id;
+    const userId = req.user.id;
+    const username = req.user.Username;
+    const content = req.body.content;
+  
+    try {
+      // Tạo comment mới
+      const newComment = {
+        content: content,
+        userId: userId,
+        date: Date.now(),
+        username: username,
+      };
+      // Cập nhật truyện
+      await comicModel.findByIdAndUpdate(comicId, {
+        $push: { commentObjects: newComment } // Thêm comment mới vào truyện
+      });
+      res.redirect(`/getDetailComic/${comicId}`); 
+    } catch (error) {
+      res.status(500).send("Lỗi khi bình luận: " + error.message);
+    }
+  }
+
   getFormUpdateComic(req, res) {
     var id = req.params.id;
     comicModel
@@ -101,7 +124,6 @@ class ComicController {
         res.status(500).json("Không tìm thấy người dùng với ID: " + id);
       });
   }
-
   updateComic(req, res) {
     const id = req.params.id;
     const updateComic = {
@@ -110,13 +132,15 @@ class ComicController {
       author: req.body.author,
       year: req.body.year,
       CateID: req.body.CateID,
-    }
+    };
     // Update images only if new files were uploaded
     if (req.files["coverImage"] && req.files["coverImage"].length != 0) {
       updateComic.coverImage = req.files["coverImage"][0].filename;
     }
     if (req.files["contentImages"] && req.files["contentImages"].length != 0) {
-      updateComic.contentImages = req.files["contentImages"].map((file) => file.filename);
+      updateComic.contentImages = req.files["contentImages"].map(
+        (file) => file.filename
+      );
     }
     comicModel
       .findByIdAndUpdate(id, updateComic, { new: true })
@@ -127,11 +151,10 @@ class ComicController {
           res.redirect("/getComic");
         }
       })
-      .catch(function(error) {
+      .catch(function (error) {
         res.status(501).send("Cập nhật thất bại " + error.message);
       });
   }
-
   deleteComic(req, res) {
     const id = req.params.id;
     comicModel

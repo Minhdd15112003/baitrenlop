@@ -1,5 +1,5 @@
 const userModel = require("../models/user.model");
-
+const { generateToken, auth } = require("../middleware/jwt");
 class UserController {
   //////////////////////////////// getUsers
   getUsers(req, res, next) {
@@ -13,7 +13,6 @@ class UserController {
         res.send("co loi xay ra", error.message);
       });
   }
-
   getIdUser(req, res, next) {
     const id = req.params.id;
     userModel.findById(id).then(function (userData) {
@@ -24,14 +23,12 @@ class UserController {
       }
     });
   }
-
   //////////////////////////////// insertUsers
   getInsertUsersForm(req, res, next) {
     res.render("home/userView/getFormRegister");
   }
-
   insertUsers(req, res, next) {
-    const { Email, Username,Fullname, Password, PasswordCheck } = req.body;
+    const { Email, Username, Fullname, Password, PasswordCheck } = req.body;
     const newUsers = {
       Email: Email,
       Username: Username,
@@ -74,7 +71,6 @@ class UserController {
         res.send("Có lỗi xảy ra", error.message);
       });
   }
-
   updateUser(req, res, next) {
     const id = req.body.id; // ID của người dùng cần cập nhật
     // const id = req.params.id
@@ -101,7 +97,6 @@ class UserController {
         res.status(501).send("Cập nhật thất bại " + error.message);
       });
   }
-
   //////////////////////////////////////////////////////////////// deleteUser
   deleteUser(req, res) {
     const id = req.params.id;
@@ -124,9 +119,6 @@ class UserController {
   }
   loginUser(req, res) {
     const { Email, Password } = req.body;
-    // console.log('====================================');
-    // console.log(req.body);
-    // console.log('====================================');
     userModel
       .findOne({ Email: Email })
       .then((user) => {
@@ -136,7 +128,13 @@ class UserController {
             .send("không tìm thấy người dụng vơi Email " + user.Email);
         } else {
           if (Password == user.Password) {
-            res.send("Đăng nhập thành công!!!");
+            const token = generateToken(user);
+            res.cookie("user", token, {
+              httpOnly: true,
+              sameSite: "Strict",
+              maxAge: 1000 * 60 * 60 * 24,
+            });
+            res.redirect("/");
             //res.json(user);
           } else {
             res.status(500).send("Mật khẩu không chính xác");
@@ -144,8 +142,14 @@ class UserController {
         }
       })
       .catch((error) => {
-        res.send("Có lỗi xảy ra khi tìm người dùng: " + error.message);
+        res
+          .status(500)
+          .json("Có lỗi xảy ra khi tìm người dùng: " + error.message);
       });
+  }
+  logOut(req, res) {
+    res.cookie("user", "", { maxAge: 1 });
+    res.redirect("/");
   }
 }
 
