@@ -134,7 +134,7 @@ class UserController {
               sameSite: "Strict",
               maxAge: 1000 * 60 * 60 * 24,
             });
-            res.redirect("/");
+            res.redirect("/getComic");
             //res.json(user);
           } else {
             res.status(500).send("Mật khẩu không chính xác");

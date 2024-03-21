@@ -133,18 +133,6 @@ body {
   transform: translateY(-50%); /* Adjust for centering */
 }
 
-.input-box{
-  position: relative;
-}
-
-.input-box i {
-  position: absolute;
-  right: 13px;
-  top:15px;
-  color:#ced4da;
-
-}
-
 
 
   

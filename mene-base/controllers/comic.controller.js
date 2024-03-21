@@ -186,20 +186,21 @@ class ComicController {
         res.send("Xóa thất bại " + error.message);
       });
   }
-
   searchComic(req, res) {
-    var name_search = req.query.name; // lấy giá trị của key name trong query parameters gửi lên
-    var result = comicModel.filter((comicName) => {
-      // tìm kiếm chuỗi name_search trong user name.
-      // Lưu ý: Chuyển tên về cùng in thường hoặc cùng in hoa để không phân biệt hoa, thường khi tìm kiếm
-      return (
-        comicName.name.toLowerCase().indexOf(name_search.toLowerCase()) !== -1
-      );
-    });
-
-    res.render("home/comicView/getComic", {
-      comicName: result, // render lại trang users/index với biến users bây giờ chỉ bao gồm các kết quả phù hợp
-    });
+    const keyword = req.query.keyword;
+    comicModel
+      .find({ name: { $regex: keyword, $options: "i" } })
+      .populate("CateID")
+      .then(function (comicData) {
+        if (comicData) {
+          res.render("home/comicView/getComic", { comicData: comicData });
+        } else {
+          res.status(501).json("Không tìm thấy người dùng" + err.message);
+        }
+      })
+      .catch(function (error) {
+        res.status(500).send("Có lỗi xảy ra: " + error.message);
+      });
   }
 }
 

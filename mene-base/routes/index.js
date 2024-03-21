@@ -25,14 +25,15 @@ router.post("/updateUser", userCtrl.updateUser);
 router.get("/deleteUser/:id", userCtrl.deleteUser);
 
 /* GET, POST Comic. */
-router.get("/getComic", comicCtrl.getComic);
+router.get("/getComic",auth, comicCtrl.getComic);
 router.post("/postComic", cpUpload, comicCtrl.postComic);
 router.get("/formPostComic", comicCtrl.formPostComic);
 router.get("/deleteComic/:id", comicCtrl.deleteComic);
+router.get('/getDetailComic/:id/getFormUpdateComic', comicCtrl.getFormUpdateComic);
 router.post("/updateComic/:id", cpUpload, comicCtrl.updateComic);
 router.get("/getDetailComic/:id", auth, comicCtrl.getDetailComic);
 router.get("/getDetailComic/:id/readComic", comicCtrl.readComic);
-//commentComic
+//commentComic     
 router.post("/getDetailComic/:id/commentComic", auth, comicCtrl.commentComic);
 router.get("/deleteComment/:comicId/:commentId", auth, comicCtrl.deleteComment);
 /* GET, POST Category. */
@@ -41,7 +42,7 @@ router.get("/getFormCate", cateCtrl.getFormCate);
 router.post("/insertCate", cateCtrl.insertCate);
 router.get("/deleteCate/:id", cateCtrl.deleteCate);
 /* GET Seach page. */
-router.get("/search", comicCtrl.searchComic);
+router.get('/searchComic', comicCtrl.searchComic);
 /* GET home page. */
 router.get("/", function (req, res, next) {
   res.render("home/index");
