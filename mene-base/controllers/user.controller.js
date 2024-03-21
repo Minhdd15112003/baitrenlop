@@ -149,7 +149,7 @@ class UserController {
   }
   logOut(req, res) {
     res.cookie("user", "", { maxAge: 1 });
-    res.redirect("/");
+    res.redirect("/getFormLogin");
   }
 }
 
