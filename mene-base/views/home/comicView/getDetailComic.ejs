@@ -39,8 +39,8 @@
     </div>
   </section>
 </form>
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 	<h1 class="comments-title">Comments</h1>
   <% for (const comment of comicData.commentObjects) { %>
       <div class="be-comment">
@@ -59,7 +59,9 @@
           </span>
           <p class="be-comment-text">
             <%= comment.content %>
-          </p>
+            <a href="/deleteComment/<%= id %>/<%= comment.id %>">
+            <img src="/img/delete.png" alt="" height="18px" width="18px">
+          </a>
         </div>
       </div>
       <% } %>

@@ -15,7 +15,6 @@ const generateToken = (user) => {
 
 const auth = (req, res, next) => {
   const userCookie = req.cookies["user"];
-
   if (!userCookie) {
     return res
       .status(401)

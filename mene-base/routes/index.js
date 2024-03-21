@@ -1,9 +1,8 @@
 var express = require("express");
 var multer = require("multer");
 var router = express.Router();
-const {generateToken, auth} = require("../middleware/jwt")
-const { cpUpload, storage } = require("../middleware/utils");
-var homeCtrl = require("../controllers/home.controller");
+var { generateToken, auth } = require("../middleware/jwt");
+var { cpUpload, storage } = require("../middleware/utils");
 var userCtrl = require("../controllers/user.controller");
 var comicCtrl = require("../controllers/comic.controller");
 var cateCtrl = require("../controllers/cate.controller");
@@ -29,21 +28,20 @@ router.get("/deleteUser/:id", userCtrl.deleteUser);
 router.get("/getComic", comicCtrl.getComic);
 router.post("/postComic", cpUpload, comicCtrl.postComic);
 router.get("/formPostComic", comicCtrl.formPostComic);
-router.get("/getDetailComic/:id",auth, comicCtrl.getDetailComic);
-router.post("/getDetailComic/:id/commentComic",auth,comicCtrl.commentComic)
-router.get("/getDetailComic/:id/readComic", comicCtrl.readComic);
 router.get("/deleteComic/:id", comicCtrl.deleteComic);
-router.get(
-  "/getDetailComic/:id/getFormUpdateComic",
-  comicCtrl.getFormUpdateComic
-);
 router.post("/updateComic/:id", cpUpload, comicCtrl.updateComic);
+router.get("/getDetailComic/:id", auth, comicCtrl.getDetailComic);
+router.get("/getDetailComic/:id/readComic", comicCtrl.readComic);
+//commentComic
+router.post("/getDetailComic/:id/commentComic", auth, comicCtrl.commentComic);
+router.get("/deleteComment/:comicId/:commentId", auth, comicCtrl.deleteComment);
 /* GET, POST Category. */
 router.get("/getCategoryById/:id", cateCtrl.getCategoryById);
 router.get("/getFormCate", cateCtrl.getFormCate);
 router.post("/insertCate", cateCtrl.insertCate);
 router.get("/deleteCate/:id", cateCtrl.deleteCate);
-
+/* GET Seach page. */
+router.get("/search", comicCtrl.searchComic);
 /* GET home page. */
 router.get("/", function (req, res, next) {
   res.render("home/index");

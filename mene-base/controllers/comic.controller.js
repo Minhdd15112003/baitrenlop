@@ -77,7 +77,7 @@ class ComicController {
   }
   async readComic(req, res) {
     var id = req.params.id;
-    var comicData = await ComicModel.findById(id);
+    var comicData = await comicModel.findById(id);
     if (comicData) {
       res.render("home/comicView/readComic", {
         comicData: comicData,
@@ -104,18 +104,31 @@ class ComicController {
       };
       // Cập nhật truyện
       await comicModel.findByIdAndUpdate(comicId, {
-        $push: { commentObjects: newComment } // Thêm comment mới vào truyện
+        $push: { commentObjects: newComment }, // Thêm comment mới vào truyện
       });
-      res.redirect(`/getDetailComic/${comicId}`); 
+      res.redirect(`/getDetailComic/${comicId}`);
     } catch (error) {
       res.status(500).send("Lỗi khi bình luận: " + error.message);
     }
   }
-
-  deleteCommentComic(req,res){
-    
+  deleteComment(req, res) {
+    const comicId = req.params.comicId;
+    const commentId = req.params.commentId;
+    comicModel
+      .findByIdAndUpdate(comicId, {
+        $pull: { commentObjects: { _id: commentId } }, // Xóa bình luận dựa trên commentId
+      })
+      .then(function (comicData) {
+        if (!comicData) {
+          res.status(500).json("Không tìm thấy truyện với ID: " + comicId);
+        } else {
+          res.redirect(`/getDetailComic/${comicId}`);
+        }
+      })
+      .catch(function (error) {
+        res.status(501).send("Xóa bình luận thất bại: " + error.message);
+      });
   }
-
   getFormUpdateComic(req, res) {
     var id = req.params.id;
     comicModel
@@ -172,6 +185,21 @@ class ComicController {
       .catch((error) => {
         res.send("Xóa thất bại " + error.message);
       });
+  }
+
+  searchComic(req, res) {
+    var name_search = req.query.name; // lấy giá trị của key name trong query parameters gửi lên
+    var result = comicModel.filter((comicName) => {
+      // tìm kiếm chuỗi name_search trong user name.
+      // Lưu ý: Chuyển tên về cùng in thường hoặc cùng in hoa để không phân biệt hoa, thường khi tìm kiếm
+      return (
+        comicName.name.toLowerCase().indexOf(name_search.toLowerCase()) !== -1
+      );
+    });
+
+    res.render("home/comicView/getComic", {
+      comicName: result, // render lại trang users/index với biến users bây giờ chỉ bao gồm các kết quả phù hợp
+    });
   }
 }
 

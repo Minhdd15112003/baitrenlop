@@ -6,7 +6,7 @@ body {
     margin-right: 10px;
   }
 .nav-item{
-  font: 20px "Lucida Grande", Helvetica, Arial, sans-serif !important;
+  font: 18px "Lucida Grande", Helvetica, Arial, sans-serif !important;
 }
 
 .be-comment-block {
@@ -118,6 +118,31 @@ body {
 
 .form-group textarea.form-input {
   height: 150px;
+}
+
+/* Style for the comments section */
+.be-comment-content {
+  position: relative; /* Establish relative positioning for child elements */
+}
+
+/* Style for the delete image */
+.be-comment-content img {
+  position: absolute; /* Make image absolutely positioned */
+  right: 0;            /* Align image to the left */
+  top: 50%;           /* Vertically center the image */
+  transform: translateY(-50%); /* Adjust for centering */
+}
+
+.input-box{
+  position: relative;
+}
+
+.input-box i {
+  position: absolute;
+  right: 13px;
+  top:15px;
+  color:#ced4da;
+
 }
 
 
