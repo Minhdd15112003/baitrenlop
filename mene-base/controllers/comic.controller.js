@@ -173,6 +173,7 @@ class ComicController {
   }
   deleteComic(req, res) {
     const id = req.params.id;
+
     comicModel
       .findByIdAndDelete(id)
       .then((comicData) => {
@@ -202,6 +203,8 @@ class ComicController {
         res.status(500).send("Có lỗi xảy ra: " + error.message);
       });
   }
+
+  
 }
 
 module.exports = new ComicController();

@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="ph25260.fpoly.client.FirstFragment"
+        android:name="ph25260.fpoly.client.ui.home.HomeFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/fragment_home">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
@@ -17,9 +17,20 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="ph25260.fpoly.client.SecondFragment"
+        android:name="ph25260.fpoly.client.ui.history.HistoryFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/fragment_history">
+
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/SecondFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ThreeFragment"
+        android:name="ph25260.fpoly.client.ui.user.UserFragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/fragment_user">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"

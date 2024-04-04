@@ -2,7 +2,7 @@ var express = require("express");
 var multer = require("multer");
 var router = express.Router();
 var { generateToken, auth } = require("../middleware/jwt");
-var { cpUpload, storage } = require("../middleware/utils");
+var { cpUpload, storage, cpAvatarUpload } = require("../middleware/utils");
 var userCtrl = require("../controllers/user.controller");
 var comicCtrl = require("../controllers/comic.controller");
 var cateCtrl = require("../controllers/cate.controller");
@@ -17,10 +17,10 @@ router.post("/loginUser", userCtrl.loginUser);
 router.get("/logOut", userCtrl.logOut);
 //insert user
 router.get("/getInsertUsersForm", userCtrl.getInsertUsersForm);
-router.post("/insertUser", userCtrl.insertUsers);
+router.post("/insertUser",cpAvatarUpload, userCtrl.insertUsers);
 //update user
 router.get("/getUpdateUsersForm/:id", userCtrl.getUpdateUsersForm);
-router.post("/updateUser", userCtrl.updateUser);
+router.post("/updateUser/:id",cpAvatarUpload, userCtrl.updateUser);
 //delete user
 router.get("/deleteUser/:id", userCtrl.deleteUser);
 

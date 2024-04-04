@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Other styles -->
+
+    <style name="TextAppearance.App.BottomNavigationView.Active" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/purple_200</item>
+    </style>
+
+    <style name="TextAppearance.App.BottomNavigationView.Inactive" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/purple_200</item>
+    </style>
+
+    <!-- Other styles -->
+</resources>

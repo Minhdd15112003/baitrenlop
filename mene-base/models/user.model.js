@@ -6,6 +6,7 @@ var userSchema = new mongoose.Schema(
     Username: { type: String, required: true },
     Fullname: { type: String, required: true } ,
     Password: { type: String, required: true },
+    Avatar: { type: String },
 
   },
   { collection: "accounts" }

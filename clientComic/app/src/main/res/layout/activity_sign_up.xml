@@ -5,121 +5,117 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bkg_login_with_overlay"
+    android:gravity="center"
     android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_gravity="center"
-        android:src="@drawable/signup"
-        />
-
-    <EditText
-        android:id="@+id/edtEmail"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/edittext_bkg"
-        android:drawableLeft="@drawable/baseline_person_24"
-        android:drawablePadding="10dp"
-        android:hint="Email"
-        android:maxLines="1"
-        android:padding="5dp"
-        android:singleLine="true"
-        android:textColorHint="#020024" />
-
-    <EditText
-        android:id="@+id/edtUsername"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/edittext_bkg"
-        android:drawableLeft="@drawable/baseline_person_24"
-        android:drawablePadding="10dp"
-        android:hint="Username"
-        android:maxLines="1"
-        android:padding="5dp"
-        android:singleLine="true"
-        android:textColorHint="#020024" />
-
-    <EditText
-        android:id="@+id/edtFullname"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/edittext_bkg"
-        android:drawableLeft="@drawable/baseline_person_24"
-        android:drawablePadding="10dp"
-        android:hint="Fullname"
-        android:maxLines="1"
-        android:padding="5dp"
-        android:singleLine="true"
-        android:textColorHint="#020024" />
-
-    <EditText
-        android:id="@+id/edtMatKhau"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/edittext_bkg"
-        android:drawableLeft="@drawable/outline_password_24"
-        android:drawablePadding="10dp"
-        android:hint="textPassword"
-        android:inputType="textPassword"
-        android:maxLines="1"
-        android:padding="7dp"
-        android:singleLine="true"
-        android:textColorHighlight="@color/cardview_dark_background"
-        android:textColorHint="#020024" />
-
-    <EditText
-        android:id="@+id/edtMatKhauCf"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/edittext_bkg"
-        android:drawableLeft="@drawable/outline_password_24"
-        android:drawablePadding="10dp"
-        android:hint="Confirm Password"
-        android:inputType="textPassword"
-        android:maxLines="1"
-        android:padding="7dp"
-        android:singleLine="true"
-        android:textColorHighlight="@color/cardview_dark_background"
-        android:textColorHint="#020024" />
-
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="24dp"
+        app:cardCornerRadius="34dp"
+        app:cardElevation="10dp">
 
-        <Button
-            android:id="@+id/btnDangNhap"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/btn_cam"
-            android:text="Đăng ký"
-            android:textColor="@color/black"
-            />
+            android:layout_margin="24dp"
+            android:orientation="vertical">
 
+            <EditText
+                android:id="@+id/edtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="20dp"
+                android:drawablePadding="10dp"
+                android:hint="Email"
+                android:maxLines="1"
+                android:padding="5dp"
+                android:singleLine="true"
+                />
 
-    </LinearLayout>
+            <EditText
+                android:id="@+id/edtUsername"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="20dp"
+                android:drawablePadding="10dp"
+                android:hint="Username"
+                android:maxLines="1"
+                android:padding="5dp"
+                android:singleLine="true"
+                />
 
+            <EditText
+                android:id="@+id/edtFullname"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="20dp"
+                android:drawablePadding="10dp"
+                android:hint="Fullname"
+                android:maxLines="1"
+                android:padding="5dp"
+                android:singleLine="true"
+                />
+
+            <EditText
+                android:id="@+id/edtMatKhau"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="20dp"
+                android:drawablePadding="10dp"
+                android:hint="textPassword"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:padding="7dp"
+                android:singleLine="true"
+                />
+
+            <EditText
+                android:id="@+id/edtMatKhauCf"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="20dp"
+                android:drawablePadding="10dp"
+                android:hint="Confirm Password"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:padding="7dp"
+                android:singleLine="true"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btnDangNhap"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/bkg_button"
+                    android:text="Đăng ký"
+                    android:textSize="24dp"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>
