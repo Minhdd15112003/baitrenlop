@@ -3,7 +3,7 @@
 /**
  * Module dependencies.
  */
-
+const socketAPI = require("../socket/socket-io");
 /**
  * Dotenv
  */
@@ -96,3 +96,5 @@ function onListening() {
     var bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
     debug("Listening on " + bind);
 }
+
+socketAPI.io.attach(server);

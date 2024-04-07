@@ -1,5 +1,6 @@
 const comicModel = require("../models/comic.model");
 const cateModel = require("../models/cate.model");
+const socketAPI = require("../socket/socket-io");
 class ComicController {
     getComic(req, res, next) {
         comicModel
@@ -42,8 +43,9 @@ class ComicController {
             .create(newComic)
             .then((comicData) => {
                 if (comicData) {
-                    res.redirect("/getComic");
-                    //res.json(comicData)
+                    // res.redirect("/getComic");
+                    socketAPI.io.emit("newComic", JSON.stringify(comicData));
+                    res.json(comicData)
                 } else {
                     res.status(501).json("Không tìm thấy người dùng" + err.message);
                 }
@@ -86,33 +88,6 @@ class ComicController {
         }
         // res.render("home/comicView/readComic");
     }
-    // async commentComic(req, res) {
-    //     const comicId = req.params.id;
-    //     const userId = req.body.userId;
-    //     const username = req.body.username;
-    //     const content = req.body.content;
-    //     const avatar = req.body.avatar;
-
-    //     try {
-    //         // Tạo comment mới
-    //         const newComment = {
-    //             comicId: comicId,
-    //             content: content,
-    //             userId: userId,
-    //             date: Date.now(),
-    //             username: username,
-    //             avatar: avatar,
-    //         };
-    //         await comicModel.findByIdAndUpdate(comicId, {
-    //             $push: { commentObjects: newComment }, // Thêm comment mới vào truyện
-    //         });
-    //         // res.redirect(`/getDetailComic/${comicId}`);
-    //         res.status(200).json({ comicData, commentObjects: comicData.commentObjects });
-    //     } catch (error) {
-    //         res.status(501).send("Lỗi khi bình luận: " + error.message);
-    //     }
-    // }
-
     async commentComic(req, res) {
         const comicId = req.params.id;
         const userId = req.body.userId;

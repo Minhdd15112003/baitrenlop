@@ -201,8 +201,6 @@ public class UserFragment extends Fragment {
         });
         return view;
     }
-
-
     public void updateUser(String id) {
         btnUpdateUser.setOnClickListener(new View.OnClickListener() {
             @Override
