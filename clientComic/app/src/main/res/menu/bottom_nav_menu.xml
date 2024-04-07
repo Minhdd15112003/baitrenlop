@@ -7,7 +7,7 @@
 
     <item
         android:id="@+id/navigation_history"
-        android:icon="@drawable/history" />
+        android:icon="@drawable/seachbook" />
 
     <item
         android:id="@+id/navigation_user"

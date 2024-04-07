@@ -25,18 +25,19 @@ router.post("/updateUser/:id",cpAvatarUpload, userCtrl.updateUser);
 router.get("/deleteUser/:id", userCtrl.deleteUser);
 
 /* GET, POST Comic. */
-router.get("/getComic",auth, comicCtrl.getComic);
+router.get("/getComic", comicCtrl.getComic);
 router.post("/postComic", cpUpload, comicCtrl.postComic);
 router.get("/formPostComic", comicCtrl.formPostComic);
 router.get("/deleteComic/:id", comicCtrl.deleteComic);
 router.get('/getDetailComic/:id/getFormUpdateComic', comicCtrl.getFormUpdateComic);
 router.post("/updateComic/:id", cpUpload, comicCtrl.updateComic);
-router.get("/getDetailComic/:id", auth, comicCtrl.getDetailComic);
+router.get("/getDetailComic/:id", comicCtrl.getDetailComic);
 router.get("/getDetailComic/:id/readComic", comicCtrl.readComic);
 //commentComic     
-router.post("/getDetailComic/:id/commentComic", auth, comicCtrl.commentComic);
-router.get("/deleteComment/:comicId/:commentId", auth, comicCtrl.deleteComment);
+router.post("/getDetailComic/:id/commentComic", comicCtrl.commentComic);
+router.get("/deleteComment/:comicId/:commentId", comicCtrl.deleteComment);
 /* GET, POST Category. */
+router.get("/getAllCate", cateCtrl.getAllCate);
 router.get("/getCategoryById/:id", cateCtrl.getCategoryById);
 router.get("/getFormCate", cateCtrl.getFormCate);
 router.post("/insertCate", cateCtrl.insertCate);

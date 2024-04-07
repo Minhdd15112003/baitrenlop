@@ -67,6 +67,11 @@ public class SignInActivity extends AppCompatActivity {
                             SharedPreferences sharedPreferences = getSharedPreferences("User", MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString("id", response.body().get_id());
+                            editor.putString("email", response.body().getEmail());
+                            editor.putString("username", response.body().getUsername());
+                            editor.putString("fullname", response.body().getFullname());
+                            editor.putString("password", response.body().getPassword());
+                            editor.putString("avatar", response.body().getAvatar());
                             editor.commit();
                             Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                             startActivity(intent);
@@ -78,7 +83,6 @@ public class SignInActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
                         Log.e("onFailure", "Request failed: ", t); // Always log the error
-
                         // Check error type
                         if (t instanceof IOException) {
                             // Likely a network connectivity error

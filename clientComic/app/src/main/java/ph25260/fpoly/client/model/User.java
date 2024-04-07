@@ -31,6 +31,19 @@ public class User {
         Password = password;
     }
 
+    public User(String email, String username, String fullname, String password, String avatar) {
+        Email = email;
+        Username = username;
+        Fullname = fullname;
+        Password = password;
+        Avatar = avatar;
+    }
+
+    public User(String avatar) {
+        Avatar = avatar;
+    }
+
+
     public String get_id() {
         return _id;
     }

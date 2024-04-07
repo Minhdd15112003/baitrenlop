@@ -11,9 +11,13 @@
 
 <body>
     <h1>ID User : <%= user._id %></h1>
-  <form method="post" action="/updateUser">
+  <form method="post" action="/updateUser/<%= user._id %>" enctype="multipart/form-data">
     <div class="form-group">
         <input name="id" value="<%= user._id %>" hidden class="form-control" >
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlFile1">Cover Image</label>
+        <input type="file" class="form-control-file" name="Avatar">
       </div>
     <div class="form-group">
       <label for="exampleInputEmail1">Email address</label>

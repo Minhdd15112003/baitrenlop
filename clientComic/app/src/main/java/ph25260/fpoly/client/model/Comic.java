@@ -1,5 +1,10 @@
 package ph25260.fpoly.client.model;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Comic {
     private String _id;
     private String name;
@@ -7,11 +12,15 @@ public class Comic {
     private String author;
     private String year;
     private String coverImage;
-    private String contentImages;
-    private String CateID;
-    private String commentObjects;
+    private List<String> contentImages;
+    @SerializedName("CateID")
+    private Cate CateID;
+    private List<CommentObject> commentObjects;
 
-    public Comic(String _id, String name, String description, String author, String year, String coverImage, String contentImages, String cateID, String commentObjects) {
+    public Comic() {
+    }
+
+    public Comic(String _id, String name, String description, String author, String year, String coverImage, List<String> contentImages, Cate cateID, List<CommentObject> commentObjects) {
         this._id = _id;
         this.name = name;
         this.description = description;
@@ -21,9 +30,6 @@ public class Comic {
         this.contentImages = contentImages;
         CateID = cateID;
         this.commentObjects = commentObjects;
-    }
-
-    public Comic() {
     }
 
     public String get_id() {
@@ -74,27 +80,27 @@ public class Comic {
         this.coverImage = coverImage;
     }
 
-    public String getContentImages() {
+    public List<String> getContentImages() {
         return contentImages;
     }
 
-    public void setContentImages(String contentImages) {
+    public void setContentImages(List<String> contentImages) {
         this.contentImages = contentImages;
     }
 
-    public String getCateID() {
+    public Cate getCateID() {
         return CateID;
     }
 
-    public void setCateID(String cateID) {
+    public void setCateID(Cate cateID) {
         CateID = cateID;
     }
 
-    public String getCommentObjects() {
+    public List<CommentObject> getCommentObjects() {
         return commentObjects;
     }
 
-    public void setCommentObjects(String commentObjects) {
+    public void setCommentObjects(List<CommentObject> commentObjects) {
         this.commentObjects = commentObjects;
     }
 }

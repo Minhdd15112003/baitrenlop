@@ -17,6 +17,9 @@ class UserController {
         const id = req.params.id;
         userModel.findById(id).then(function (userData) {
             if (userData) {
+                console.log('====================================');
+                console.log(userData);
+                console.log('====================================');
                 res.json(userData);
             } else {
                 res.send("Không tìm thấy người dùng với ID: " + id);
@@ -37,9 +40,7 @@ class UserController {
             Password: req.body.Password,
             Avatar: Avatar,
         };
-        if(Avatar == null){
-            newUsers.Avatar = "img/user.png";
-        }
+   
         console.log("====================================");
         console.log(newUsers);
         console.log("====================================");
@@ -47,7 +48,7 @@ class UserController {
             .create(newUsers)
             .then((user) => {
                 // res.redirect("/getUsers");
-                res.status(401).json({ user: user, message: "Thêm thành công" });
+                res.status(200).json({ user: user, message: "Thêm thành công" });
             })
             .catch((error) => {
                 if (error.name === "ValidationError") {
@@ -77,7 +78,7 @@ class UserController {
     updateUser(req, res, next) {
         const id = req.params.id; // ID của người dùng cần cập nhật
         // const id = req.params.id
-        let Avatar = req.files ? req.files.filename : null;
+        let Avatar = req.file ? req.file.filename : null;
         const updatedUser = {
             Email: req.body.Email,
             Username: req.body.Username,
@@ -85,6 +86,9 @@ class UserController {
             Password: req.body.Password,
             Avatar: Avatar,
         };
+
+        Avatar == null ? delete updatedUser.Avatar : null;
+
        console.log('====================================');
        console.log(updatedUser);
        console.log('====================================');
@@ -109,14 +113,14 @@ class UserController {
             .findByIdAndDelete(id)
             .then((user) => {
                 if (!user) {
-                    res.send("Không tìm thấy người dùng với ID: " + id);
+                    res.status(401).json("Không tìm thấy người dùng với ID: " + id);
                 } else {
                     //res.redirect("/getUsers");
                     res.json({ message: "Xóa thành công" });
                 }
             })
             .catch((error) => {
-                res.send("Xóa thất bại " + error.message);
+                res.status(403).json("Xóa thất bại " + error.message);
             });
     }
     //////////////////////////////////////////////////////////////// getLoginUsersForm

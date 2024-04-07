@@ -3,6 +3,7 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
+        maven { setUrl ("https://jitpack.io") }
     }
 }
 dependencyResolutionManagement {
@@ -10,6 +11,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        mavenCentral() // For ImagePicker library, this line is enough. Although, it has been published on jitpack as well
+        maven { setUrl ("https://jitpack.io") }
     }
 }
 

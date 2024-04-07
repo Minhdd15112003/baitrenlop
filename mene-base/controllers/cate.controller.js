@@ -23,9 +23,7 @@ class cateController{
         res.status(500).json("Them that bai " + error.message);
       });
   }
-
   //////////////////////////////// deleteCate
-
   deleteCate(req, res) {
     const id = req.params.id;
     cateModel
@@ -50,15 +48,26 @@ class cateController{
       .populate("CateID")
       .then((comicData) => {
         if (comicData) {
-          res.render("home/comicView/getComic", {
-            comicData: comicData,
-          });
+          // res.render("home/comicView/getComic", {
+          //   comicData: comicData,
+          // });
+          res.status(200).json(comicData);
         } else {
           res.status(500).json("Không tìm thấy sản phẩm trong danh mục: " + CateID);
         }
       })
       .catch((error) => {
         res.status(500).json("lỗi chức năng : " + error.message);
+      });
+  }
+  getAllCate(req, res, next) {
+    cateModel
+      .find({})
+      .then(function (cateData) {
+      res.status(200).json(cateData);
+      })
+      .catch(function (error) {
+      res.status(500).json("Lỗi lấy danh mục: " + error.message);
       });
   }
 }

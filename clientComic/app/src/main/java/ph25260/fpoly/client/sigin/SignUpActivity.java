@@ -1,9 +1,6 @@
 package ph25260.fpoly.client.sigin;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,11 +8,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.io.IOException;
 
 import ph25260.fpoly.client.API.ApiManager;
 import ph25260.fpoly.client.API.UsersService;
-import ph25260.fpoly.client.MainActivity;
 import ph25260.fpoly.client.R;
 import ph25260.fpoly.client.model.User;
 import retrofit2.Call;
@@ -70,7 +68,7 @@ public class SignUpActivity extends AppCompatActivity {
                 call.enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
-                        if (response.body() != null) {
+                        if (response.body() != null && response.isSuccessful()) {
                             Toast.makeText(SignUpActivity.this, "Đăng kí thành công", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(SignUpActivity.this, SignInActivity.class);
                             startActivity(intent);

@@ -5,21 +5,16 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.Toolbar;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import ph25260.fpoly.client.databinding.ActivityMainBinding;
+import ph25260.fpoly.client.ui.comic.HomeFragment;
 import ph25260.fpoly.client.ui.history.HistoryFragment;
-import ph25260.fpoly.client.ui.home.HomeFragment;
 import ph25260.fpoly.client.ui.user.UserFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -56,10 +51,10 @@ public class MainActivity extends AppCompatActivity {
                     toolbar.setTitle("Home");
                 } else if (id == R.id.navigation_user) {
                     selectedFragment = new UserFragment();
-                    toolbar.setTitle("User");
+                    toolbar.setTitle("tài khoản");
                 } else if (id == R.id.navigation_history) {
                     selectedFragment = new HistoryFragment();
-                    toolbar.setTitle("History");
+                    toolbar.setTitle("Tìm kiếm");
                 }
 
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
