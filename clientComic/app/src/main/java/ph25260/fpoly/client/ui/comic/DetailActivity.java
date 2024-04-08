@@ -63,9 +63,7 @@ public class DetailActivity extends AppCompatActivity {
         rvComment = findViewById(R.id.rcvCommet);
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
-
         commentArrayList = new ArrayList<>();
-
         comicService.getDetailComic(id).enqueue(new Callback<Comic>() {
             @Override
             public void onResponse(Call<Comic> call, Response<Comic> response) {

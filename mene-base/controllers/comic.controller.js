@@ -44,7 +44,7 @@ class ComicController {
             .then((comicData) => {
                 if (comicData) {
                     // res.redirect("/getComic");
-                    socketAPI.io.emit("newComic", JSON.stringify(comicData));
+                    socketAPI.io.emit("newComic",  comicData.name);
                     res.json(comicData)
                 } else {
                     res.status(501).json("Không tìm thấy người dùng" + err.message);

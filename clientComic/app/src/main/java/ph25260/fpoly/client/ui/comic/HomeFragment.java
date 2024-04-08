@@ -112,9 +112,9 @@ public class HomeFragment extends Fragment {
                             if (position == 0){
                                 listComic.clear();
                                 loadComic();
-                            }else {
-                                selectedCateId = cateArrayList.get(position).get_id();
+                            }else{
                                 listComic.clear();
+                                selectedCateId = cateArrayList.get(position - 1).get_id();
                                 loadComicByCate(selectedCateId);
                             }
                         }

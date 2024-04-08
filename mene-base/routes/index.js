@@ -7,7 +7,7 @@ var userCtrl = require("../controllers/user.controller");
 var comicCtrl = require("../controllers/comic.controller");
 var cateCtrl = require("../controllers/cate.controller");
 /* GET, POST User. */
-router.get("/getUsers", auth, userCtrl.getUsers);
+router.get("/getUsers", userCtrl.getUsers);
 router.get("/getUserByID/:id", userCtrl.getIdUser);
 //Login user
 // router.get("/getLoginUsersForm",userCtrl.getLoginUsersForm);
