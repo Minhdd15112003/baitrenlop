@@ -39,16 +39,16 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
     @NonNull
     @Override
     public ComicAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = View.inflate(parent.getContext(), R.layout.item_list_truyen, null);
+        View view = View.inflate(parent.getContext(), R.layout.itemlistruyen, null);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ComicAdapter.ViewHolder holder, int position) {
         holder.tvTenTruyen.setText(listComic.get(position).getName());
-        holder.tvTacGia.setText(listComic.get(position).getAuthor());
+//        holder.tvTacGia.setText(listComic.get(position).getAuthor());
         Picasso.get().load(ApiConfig.BASE_URL + "/uploads/" + listComic.get(position).getCoverImage()).into(holder.imgAnhTruyen);
-        holder.tvTheLoai.setText(listComic.get(position).getCateID().getCate());
+//        holder.tvTheLoai.setText(listComic.get(position).getCateID().getCate());
         holder.detailComicView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

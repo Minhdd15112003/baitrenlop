@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment {
         } else {
             imgAvatar.setImageResource(R.drawable.avatar);
         }
-        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 1);
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
         rvListTruyen.setLayoutManager(layoutManager);
         listComic = new ArrayList<>();
         cateArrayList = new ArrayList<>();
