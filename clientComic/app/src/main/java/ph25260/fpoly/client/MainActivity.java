@@ -1,11 +1,11 @@
 package ph25260.fpoly.client;
 
-import android.Manifest;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.pm.PackageManager;
 import android.media.AudioAttributes;
+import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
@@ -40,31 +40,33 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     FrameLayout frameLayout;
     public static final String CHANEL_ID = "ABC1234"; //tự đặt thành tên mới
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                // Tên chanel
-                CharSequence name = "ten_chanel"; // tên hiển thị trong cài đặt notify của điện thoại
-                // mo ta:
-                String mota = "Mo ta";
-                int do_uu_tien = NotificationManager.IMPORTANCE_DEFAULT;
 
-                Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-                AudioAttributes audioAttributes = new AudioAttributes.Builder()
-                        .setUsage(AudioAttributes.USAGE_GAME)
-                        .build();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // Tên chanel
+            CharSequence name = "ten_chanel"; // tên hiển thị trong cài đặt notify của điện thoại
+            // mo ta:
+            String mota = "Mo ta";
+            int do_uu_tien = NotificationManager.IMPORTANCE_DEFAULT;
 
-                // đăng ký notify
-                NotificationChannel channel = new NotificationChannel(CHANEL_ID, name, do_uu_tien);
+            Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+            AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_GAME)
+                    .build();
 
-                channel.setDescription(mota);
+            // đăng ký notify
+            NotificationChannel channel = new NotificationChannel(CHANEL_ID, name, do_uu_tien);
 
-                channel.setSound(uri, audioAttributes);
-                NotificationManager notificationManager = getSystemService(NotificationManager.class);
-                notificationManager.createNotificationChannel(channel);
-            }
+            channel.setDescription(mota);
+
+            channel.setSound(uri, audioAttributes);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+
 
         SocketConfig socketConfig = new SocketConfig();
         socketConfig.mSocket.connect();
@@ -75,13 +77,12 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         postNotify("ComicSaga", args[0].toString());
-                        Toast.makeText(MainActivity.this, "NOi dung: " + args[0]
+                        Toast.makeText(MainActivity.this, "Cập nhật truyện: " + args[0]
                                 , Toast.LENGTH_SHORT).show();
                     }
                 });
             }
         });
-
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -90,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         frameLayout = binding.navHostFragmentActivityMain;
         navView.setItemIconTintList(null);
         setActionBar(toolbar);
+        toolbar.setVisibility(android.view.View.GONE);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.nav_host_fragment_activity_main, new HomeFragment()).commit();
@@ -121,27 +123,27 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
     void postNotify(String title, String content){
         // Khởi tạo layout cho Notify
-        Object NotifyConfig = null;
-        Notification customNotification = new NotificationCompat.Builder(MainActivity.this, CHANEL_ID)
-                .setSmallIcon(android.R.drawable.ic_delete)
+        Notification customNotification = new NotificationCompat.Builder(MainActivity.this,CHANEL_ID)
                 .setContentTitle( title )
                 .setContentText(content)
                 .setAutoCancel(true)
-
+                .setSound(null)
+                .setSmallIcon(R.drawable.logocomic)
                 .build();
+        MediaPlayer mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.noti);
+        mediaPlayer.start();
         // Khởi tạo Manager để quản lý notify
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(MainActivity.this);
 
         // Cần kiểm tra quyền trước khi hiển thị notify
         if (ActivityCompat.checkSelfPermission(MainActivity.this,
-                Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
 
             // Gọi hộp thoại hiển thị xin quyền người dùng
             ActivityCompat.requestPermissions(MainActivity.this,
-                    new String[]{Manifest.permission.POST_NOTIFICATIONS}, 999999);
+                    new String[]{android.Manifest.permission.POST_NOTIFICATIONS}, 999999);
             Toast.makeText(MainActivity.this, "Chưa cấp quyền", Toast.LENGTH_SHORT).show();
             return; // thoát khỏi hàm nếu chưa được cấp quyền
         }
@@ -152,5 +154,6 @@ public class MainActivity extends AppCompatActivity {
         notificationManagerCompat.notify(id_notiy , customNotification);
 
     }
+
 
 }
